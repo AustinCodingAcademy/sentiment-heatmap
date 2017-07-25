@@ -1,0 +1,9 @@
+{
+  "name": "sentiment-heatmap",
+  "scripts": {
+    "start": "http-server -S"
+  },
+  "dependencies": {
+    "http-server": "^0.10.0"
+  }
+}

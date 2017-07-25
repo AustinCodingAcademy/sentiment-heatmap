@@ -3,27 +3,85 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-  </head>
-  <script src="https://webgazer.cs.brown.edu/webgazer.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.2/heatmap.min.js"></script>
-  <body>
-    <div id="heatmap" style="height: -webkit-fill-available"></div>
+    <style media="screen">
+      th {
+        max-width: 400px;
+      }
+      table {
+        overflow: hidden;
+      }
 
-    <script type="text/javascript">
-    window.onload = function() {
-      var heatmap = h337.create({
-        container: document.querySelector('#heatmap')
-      });
-      webgazer.setGazeListener(function(data, elapsedTime) {
-        if (data == null) return;
-        console.log(elapsedTime, data);
-        heatmap.addData([{
-          x: data.x,
-          y: data.y,
-          value: 5
-        }])
-      }).begin();
-    }
-    </script>
+      tr:hover {
+        background-color: #cccccc;
+      }
+
+      td, th {
+        position: relative;
+        text-align: center;
+      }
+      td:hover::after,
+      th:hover::after {
+        content: "";
+        position: absolute;
+        background-color: #cccccc;
+        left: 0;
+        top: -5000px;
+        height: 10000px;
+        width: 100%;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>
+            ridge
+            <br>
+            <small>A simple ridge regression model mapping pixels from the detected eyes to locations on the screen<small>
+          </th>
+          <th>
+            weightedRidge
+            <br>
+            <small>A weight ridge regression model with newest user interactions contribution more to the model<small>
+          </th>
+          <th>
+            threadedRidge
+            <br>
+            <small>A faster implementation of ridge regression that uses threads<small>
+          </th>
+          <th>
+            linear
+            <br>
+            <small>A basic simple linear regression that maps<small>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://github.com/auduno/clmtrackr">clmtrackr</a></td>
+          <td><a href="heatmap.html?regression=ridge&tracker=clmtrackr">test</a></td>
+          <td><a href="heatmap.html?regression=weightedRidge&tracker=clmtrackr">test</a></td>
+          <td><a href="heatmap.html?regression=threadedRidge&tracker=clmtrackr">test</a></td>
+          <td><a href="heatmap.html?regression=linear&tracker=clmtrackr">test</a></td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/mtschirs/js-objectdetect">js_objectdetect</a></td>
+          <td><a href="heatmap.html?regression=ridge&tracker=js_objectdetect">test</a></td>
+          <td><a href="heatmap.html?regression=weightedRidge&tracker=js_objectdetect">test</a></td>
+          <td><a href="heatmap.html?regression=threadedRidge&tracker=js_objectdetect">test</a></td>
+          <td><a href="heatmap.html?regression=linear&tracker=js_objectdetect">test</a></td>
+        </tr>
+        <tr>
+          <td><a href="https://trackingjs.com/">tracking.js</a></td>
+          <td><a href="heatmap.html?regression=ridge&tracker=trackingjs">test</a></td>
+          <td><a href="heatmap.html?regression=weightedRidge&tracker=trackingjs">test</a></td>
+          <td><a href="heatmap.html?regression=threadedRidge&tracker=trackingjs">test</a></td>
+          <td><a href="heatmap.html?regression=linear&tracker=trackingjs">test</a></td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>
